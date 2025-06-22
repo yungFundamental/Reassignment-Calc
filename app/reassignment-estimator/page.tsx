@@ -20,9 +20,9 @@ export default function EstimationPage() {
 	return (
 		<div>
 			<h1 className={title()}>Estimation</h1>
-				<div className="w-3/4 mx-auto h-[600px] flex items-center justify-center">
+				<div className="w-full mx-auto h-[600px] flex items-center justify-center">
 					{/* Responsive: let Graph fill parent by omitting width/height props */}
-					<Graph points={points} xLabel="Throttle (MB/s)" yLabel="Duration (hrs)"/>
+					<Graph points={points} xLabel="Throttle (MB/s)" yLabel="Duration (hrs)" width={1200} height={600}/>
 				</div>
 			</div>
 	);
