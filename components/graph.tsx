@@ -17,8 +17,6 @@ type Point = {
 };
 
 type GraphProps = {
-    width?: number;
-    height?: number;
     points: Point[];
     color?: string;
     xLabel?: string;
@@ -26,8 +24,6 @@ type GraphProps = {
 };
 
 const Graph: React.FC<GraphProps> = ({
-    width = 400,
-    height = 200,
     points,
     color = "#0074D9",
     xLabel = "Throttle (MB/s)",
@@ -38,7 +34,7 @@ const Graph: React.FC<GraphProps> = ({
     const data = points.map(p => ({ x: p.x, y: p.y }));
 
     return (
-        <ResponsiveContainer width={width} height={height}>
+        <ResponsiveContainer width="100%" height="100%">
             <LineChart
                 data={data}
                 margin={{ top: 20, right: 20, left: 20, bottom: 20 }}
