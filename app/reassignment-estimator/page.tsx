@@ -2,6 +2,7 @@
 import { title } from "@/components/primitives";
 import Graph from "@/components/graph";
 import { useState } from "react";
+import getDataPoints from "./logic";
 
 const data = [
 	{ throttle: 10, duration: 120 },
@@ -23,7 +24,22 @@ export default function EstimationPage() {
 	const [replication, setReplication] = useState(3);
 	const [throughput, setThroughput] = useState(100);
 	const [brokersAfter, setBrokersAfter] = useState(6);
-
+	console.log("params", {
+		totalStorageToMove: storage,
+		totalBrokersAfter: brokersAfter,
+		brokerReplicationThroughput: throughput * replication / brokersBefore,
+		averageClusterThroughputIn: throughput,
+		replicationFactor: replication
+	});
+	
+	console.log("getDataPoints", getDataPoints({
+		totalStorageToMove: storage,
+		totalBrokersAfter: brokersAfter,
+		brokerReplicationThroughput: throughput * replication / brokersBefore,
+		averageClusterThroughputIn: throughput,
+		replicationFactor: replication
+	}));
+	
 	return (
 		<div>
 			<h1 className={title()}>Estimation</h1>
@@ -39,22 +55,28 @@ export default function EstimationPage() {
 						<input type="number" className="input input-bordered" value={brokersBefore} onChange={e => setBrokersBefore(Number(e.target.value))} min={1} />
 					</label>
 					<label className="flex flex-col text-left">
-						<span className="font-medium mb-1">Replication factor</span>
-						<input type="number" className="input input-bordered" value={replication} onChange={e => setReplication(Number(e.target.value))} min={1} />
-					</label>
-					<label className="flex flex-col text-left">
-						<span className="font-medium mb-1">Average inbound throughput (MB/s)</span>
+						<span className="font-medium mb-1">Cluster average inbound throughput (MB/s)</span>
 						<input type="number" className="input input-bordered" value={throughput} onChange={e => setThroughput(Number(e.target.value))} min={1} />
 					</label>
 					<label className="flex flex-col text-left">
 						<span className="font-medium mb-1">Amount of brokers after</span>
 						<input type="number" className="input input-bordered" value={brokersAfter} onChange={e => setBrokersAfter(Number(e.target.value))} min={1} />
 					</label>
+					<label className="flex flex-col text-left">
+						<span className="font-medium mb-1">Replication factor</span>
+						<input type="number" className="input input-bordered" value={replication} onChange={e => setReplication(Number(e.target.value))} min={1} />
+					</label>
 				</div>
 				{/* Graph panel */}
 				<div className="flex-1 h-full min-w-0 flex">
 					<div className="w-full h-full flex items-center justify-center">
-						<Graph points={points} xLabel="Throttle (MB/s)" yLabel="Duration (hrs)" />
+						<Graph points={getDataPoints({
+							totalStorageToMove: storage,
+							totalBrokersAfter: brokersAfter,
+							brokerReplicationThroughput: throughput*replication/brokersBefore,
+							averageClusterThroughputIn: throughput,
+							replicationFactor: replication
+						}).map(({ throttle, duration }) => ({ x: throttle, y: duration }))} xLabel="Throttle (MB/s)" yLabel="Duration (hrs)" />
 					</div>
 				</div>
 			</div>
