@@ -3,7 +3,7 @@ import { title } from "@/components/primitives";
 import Graph from "@/components/graph";
 import { useState } from "react";
 import getDataPoints from "./logic";
-
+import { Slider } from "@heroui/slider";
 
 export default function EstimationPage() {
 	const [storage, setStorage] = useState(1000);
@@ -11,6 +11,7 @@ export default function EstimationPage() {
 	const [replication, setReplication] = useState(3);
 	const [clusterInboundThroughput, setClusterInboundThroughput] = useState(100);
 	const [brokersAfter, setBrokersAfter] = useState(6);
+	const [numOfPoints, setNumOfPoints] = useState(10);
 	
 	return (
 		<div>
@@ -38,6 +39,18 @@ export default function EstimationPage() {
 						<span className="font-medium mb-1">Replication factor</span>
 						<input type="number" className="input input-bordered" value={replication} onChange={e => setReplication(Number(e.target.value))} min={1} />
 					</label>
+					<div className="flex flex-col gap-2">
+						<span className="font-medium">Number of data points</span>
+						<Slider
+							value={numOfPoints}
+							onChange={value => setNumOfPoints(Array.isArray(value) ? value[0] : value)}
+							minValue={10}
+							maxValue={100}
+							step={10}
+							className="w-full"
+							showSteps
+						/>
+					</div>
 				</div>
 				{/* Graph panel */}
 				<div className="flex-1 h-full min-w-0 flex">
@@ -47,7 +60,8 @@ export default function EstimationPage() {
 							totalBrokersAfter: brokersAfter,
 							brokerReplicationThroughput,
 							averageClusterThroughputIn: clusterInboundThroughput,
-							replicationFactor: replication
+							replicationFactor: replication,
+							numOfPoints,
 						}).map(({ throttle, duration }) => ({ x: throttle, y: duration }))} xLabel="Throttle (MB/s)" yLabel="Duration (hrs)" />
 					</div>
 				</div>

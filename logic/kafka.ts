@@ -5,6 +5,7 @@ export type ReassignmentParams = {
     averageClusterThroughputIn: number;
     replicationFactor: number;
     replicationThrottle: number;
+    numOfPoints: number;
 };
 
 export const calculateReassignmentDuration = ({
