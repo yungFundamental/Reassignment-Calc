@@ -26,12 +26,17 @@ type GraphProps = {
 const Graph: React.FC<GraphProps> = ({
     points,
     color = "#0074D9",
-    xLabel = "Throttle (MB/s)",
-    yLabel = "Duration (sec)",
+    xLabel = "X",
+    yLabel = "Y",
 }) => {
     const { theme } = useTheme();
     const chartColor = color || (theme === "dark" ? "#00C8FF" : "#0074D9");
-    const data = points.map(p => ({ x: p.x, y: p.y }));
+    const data = points.map(p => ({
+        x: p.x,
+        y: p.y,
+        [xLabel]: p.x,
+        [yLabel]: p.y,
+    }));
 
     return (
         <ResponsiveContainer width="100%" height="100%">
@@ -61,18 +66,25 @@ const Graph: React.FC<GraphProps> = ({
                     }}
                 />
                 <Tooltip
+                    formatter={(_, name) => {
+                        if (name === 'y') return [_, yLabel];
+                        if (name === 'x') return [_, xLabel];
+                        return [_, name];
+                    }}
+                    labelFormatter={label => `${xLabel}: ${label}`}
                     contentStyle={{
                         background: theme === "dark" ? "#222" : "#fff",
                         color: theme === "dark" ? "#fff" : "#222",
                     }}
                 />
-                <Legend />
+                <Legend formatter={() => yLabel} />
                 <Line
                     type="monotone"
                     dataKey="y"
                     stroke={chartColor}
                     strokeWidth={2}
                     dot={{ r: 3, fill: chartColor }}
+                    name={yLabel}
                 />
             </LineChart>
         </ResponsiveContainer>
