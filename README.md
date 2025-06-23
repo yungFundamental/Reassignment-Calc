@@ -22,7 +22,7 @@ npm run dev
 
 ## Template
 
-This is a template for creating applications using Next.js 14 (app directory) and HeroUI (v2).
+This is a template for creating applications using Next.js 14 (app directory) and [HeroUI (v2)](https://www.heroui.com/).
 
 [Try it on CodeSandbox](https://githubbox.com/heroui-inc/heroui/next-app-template)
 
