@@ -3,6 +3,7 @@ import { title } from "@/components/primitives";
 import Graph from "@/components/graph";
 import { useState } from "react";
 import getDataPoints from "./logic";
+import { NumberInput } from "@heroui/react";
 
 
 export default function EstimationPage() {
@@ -19,24 +20,19 @@ export default function EstimationPage() {
 				{/* Parameter input panel */}
 				<div className="flex flex-col gap-4 w-80 bg-white dark:bg-zinc-900 rounded-xl shadow p-6">
 					<label className="flex flex-col text-left">
-						<span className="font-medium mb-1">Amount of storage to move (GB)</span>
-						<input type="number" className="input input-bordered" value={storage} onChange={e => setStorage(Number(e.target.value))} min={0} />
+						<NumberInput size="lg" className="input input-bordered" label="Amount of storage to move (GB)" value={storage} onValueChange={setStorage} min={0} />
 					</label>
 					<label className="flex flex-col text-left">
-						<span className="font-medium mb-1">Amount of broker replication throughput</span>
-						<input type="number" className="input input-bordered" value={brokerReplicationThroughput} onChange={e => setBrokerReplicationThroughput(Number(e.target.value))} min={1} />
+						<NumberInput size="lg" className="input input-bordered" label="Amount of broker replication throughput" value={brokerReplicationThroughput} onValueChange={setBrokerReplicationThroughput} min={1} />
 					</label>
 					<label className="flex flex-col text-left">
-						<span className="font-medium mb-1">Cluster average inbound throughput (MB/s)</span>
-						<input type="number" className="input input-bordered" value={clusterInboundThroughput} onChange={e => setClusterInboundThroughput(Number(e.target.value))} min={1} />
+						<NumberInput size="lg" className="input input-bordered" label="Cluster average inbound throughput (MB/s)" value={clusterInboundThroughput} onValueChange={setClusterInboundThroughput} min={1} />
 					</label>
 					<label className="flex flex-col text-left">
-						<span className="font-medium mb-1">Amount of brokers after</span>
-						<input type="number" className="input input-bordered" value={brokersAfter} onChange={e => setBrokersAfter(Number(e.target.value))} min={1} />
+							<NumberInput size="lg" className="input input-bordered" label="Amount of brokers after" value={brokersAfter} onValueChange={setBrokersAfter} min={1} />
 					</label>
 					<label className="flex flex-col text-left">
-						<span className="font-medium mb-1">Replication factor</span>
-						<input type="number" className="input input-bordered" value={replication} onChange={e => setReplication(Number(e.target.value))} min={1} />
+						<NumberInput size="lg" className="input input-bordered" label="Replication factor" value={replication} onValueChange={setReplication} min={1} enterKeyHint="done" />
 					</label>
 				</div>
 				{/* Graph panel */}
