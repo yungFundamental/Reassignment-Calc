@@ -11,21 +11,6 @@ export default function EstimationPage() {
 	const [replication, setReplication] = useState(3);
 	const [clusterInboundThroughput, setClusterInboundThroughput] = useState(100);
 	const [brokersAfter, setBrokersAfter] = useState(6);
-	console.log("params", {
-		totalStorageToMove: storage,
-		totalBrokersAfter: brokersAfter,
-		brokerReplicationThroughput,
-		averageClusterThroughputIn: clusterInboundThroughput,
-		replicationFactor: replication
-	});
-	
-	console.log("getDataPoints", getDataPoints({
-		totalStorageToMove: storage,
-		totalBrokersAfter: brokersAfter,
-		brokerReplicationThroughput: clusterInboundThroughput * replication / brokerReplicationThroughput,
-		averageClusterThroughputIn: clusterInboundThroughput,
-		replicationFactor: replication
-	}));
 	
 	return (
 		<div>

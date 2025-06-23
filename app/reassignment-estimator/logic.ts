@@ -8,7 +8,6 @@ const getDataPoints = (params: GetDataPointsParams): DataPoint[] => {
 
   const minThrottle = calculateReassignmentThrottle({duration: 3, ...params});
   const range: number[] = Array.from({ length: 11 }, (_, i) => minThrottle + i * 10);
-  console.log("getDataPoints range", range);
   const dataPoints: DataPoint[] = range.map((throttle) => {
     const duration = calculateReassignmentDuration({
       ...params,
