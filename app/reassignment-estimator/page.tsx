@@ -13,7 +13,7 @@ export default function EstimationPage() {
 	const [brokersAfter, setBrokersAfter] = useState(6);
 	
 	return (
-		<div>
+		<>
 			<h1 className={title()}>Estimation</h1>
 			<div className="w-[1200px] mx-auto h-[600px] flex items-center justify-center gap-8">
 				{/* Parameter input panel */}
@@ -52,7 +52,7 @@ export default function EstimationPage() {
 					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 }
 
