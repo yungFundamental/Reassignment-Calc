@@ -4,10 +4,8 @@ export default function EstimationLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      <div className="inline-block text-center justify-center">
-        {children}
-      </div>
+    <section className="relative w-full items-center justify-center h-full flex flex-col gap-4 py-8 md:py-10">
+      <div className="inline-block text-center justify-center relative w-full h-full">{children}</div>
     </section>
   );
 }

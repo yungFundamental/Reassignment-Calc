@@ -15,7 +15,7 @@ export default function EstimationPage() {
 	return (
 		<>
 			<h1 className={title()}>Estimation</h1>
-			<div className="w-[1200px] mx-auto h-[600px] flex items-center justify-center gap-8">
+			<div className="max-w-6xl w-full mx-auto h-[70vh] flex items-center justify-center gap-8">
 				{/* Parameter input panel */}
 				<div className="flex flex-col gap-4 w-80 bg-white dark:bg-zinc-900 rounded-xl shadow p-6">
 					<label className="flex flex-col text-left">
