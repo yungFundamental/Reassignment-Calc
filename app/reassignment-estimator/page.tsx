@@ -4,7 +4,11 @@ import Graph from "@/components/graph";
 import { useState } from "react";
 import getDataPoints from "../../logic/reassignment-graph";
 import { NumberInput } from "@heroui/react";
+import { Slider } from "@heroui/slider";
 
+
+const minInterval = 2;
+const maxInterval = 50;
 
 export default function EstimationPage() {
 	const [storage, setStorage] = useState(1000);
@@ -12,7 +16,8 @@ export default function EstimationPage() {
 	const [replication, setReplication] = useState(3);
 	const [clusterInboundThroughput, setClusterInboundThroughput] = useState(100);
 	const [brokersAfter, setBrokersAfter] = useState(6);
-	
+	const [throttleInterval, setThrottleInterval] = useState(10);
+
 	return (
 		<>
 			<h1 className={title()}>Estimation</h1>
@@ -34,6 +39,17 @@ export default function EstimationPage() {
 					<label className="flex flex-col text-left">
 						<NumberInput size="lg" className="input input-bordered" label="Replication factor" value={replication} onValueChange={setReplication} min={1} enterKeyHint="done" />
 					</label>
+					<div className="flex flex-col gap-2">
+						<Slider
+							label="Zoom"
+							onChange={value => {setThrottleInterval(maxInterval + minInterval - (Array.isArray(value) ? value[0] : value) * maxInterval)}}
+							minValue={minInterval/maxInterval}
+							maxValue={1}
+							step={1/maxInterval}
+							className="w-full"
+							hideValue
+						/>
+					</div>
 				</div>
 				{/* Graph panel */}
 				<div className="flex-1 h-full min-w-0 flex">
@@ -43,7 +59,8 @@ export default function EstimationPage() {
 							totalBrokersAfter: brokersAfter,
 							brokerReplicationThroughput,
 							averageClusterThroughputIn: clusterInboundThroughput,
-							replicationFactor: replication
+							replicationFactor: replication,
+							throttleStep: throttleInterval
 						}).map(({ throttle, duration }) => ({ x: throttle, y: duration }))} xLabel="Throttle (MB/s)" yLabel="Duration (hrs)" />
 					</div>
 				</div>
