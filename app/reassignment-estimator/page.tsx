@@ -25,16 +25,16 @@ export default function EstimationPage() {
 				{/* Parameter input panel */}
 				<div className="flex flex-col gap-4 w-80 bg-white dark:bg-zinc-900 rounded-xl shadow p-6">
 					<label className="flex flex-col text-left">
-						<NumberInput size="lg" className="input input-bordered" label="Amount of storage to move (GB)" value={storage} onValueChange={setStorage} min={0} />
+						<NumberInput size="lg" className="input input-bordered" label="Storage to move (GB)" value={storage} onValueChange={setStorage} min={0} />
 					</label>
 					<label className="flex flex-col text-left">
-						<NumberInput size="lg" className="input input-bordered" label="Amount of broker replication throughput" value={brokerReplicationThroughput} onValueChange={setBrokerReplicationThroughput} min={1} />
+						<NumberInput size="lg" className="input input-bordered" label="Broker replication throughput" value={brokerReplicationThroughput} onValueChange={setBrokerReplicationThroughput} min={1} />
 					</label>
 					<label className="flex flex-col text-left">
-						<NumberInput size="lg" className="input input-bordered" label="Cluster average inbound throughput (MB/s)" value={clusterInboundThroughput} onValueChange={setClusterInboundThroughput} min={1} />
+						<NumberInput size="lg" className="input input-bordered" label="Cluster throughput in (MB/s)" value={clusterInboundThroughput} onValueChange={setClusterInboundThroughput} min={1} />
 					</label>
 					<label className="flex flex-col text-left">
-							<NumberInput size="lg" className="input input-bordered" label="Amount of brokers after" value={brokersAfter} onValueChange={setBrokersAfter} min={1} />
+							<NumberInput size="lg" className="input input-bordered" label="Brokers count" value={brokersAfter} onValueChange={setBrokersAfter} min={1} />
 					</label>
 					<label className="flex flex-col text-left">
 						<NumberInput size="lg" className="input input-bordered" label="Replication factor" value={replication} onValueChange={setReplication} min={1} enterKeyHint="done" />
