@@ -29,7 +29,7 @@ export default function EstimationPage() {
 						<NumberInput size="lg" className="input input-bordered" label="Cluster average inbound throughput (MB/s)" value={clusterInboundThroughput} onValueChange={setClusterInboundThroughput} min={1} />
 					</label>
 					<label className="flex flex-col text-left">
-							<NumberInput size="lg" className="input input-bordered" label="Amount of brokers after" value={brokersAfter} onValueChange={setBrokersAfter} min={1} />
+							<NumberInput size="lg" className="input input-bordered" label="Broker count" value={brokersAfter} onValueChange={setBrokersAfter} min={1} />
 					</label>
 					<label className="flex flex-col text-left">
 						<NumberInput size="lg" className="input input-bordered" label="Replication factor" value={replication} onValueChange={setReplication} min={1} enterKeyHint="done" />
