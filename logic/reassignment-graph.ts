@@ -2,15 +2,19 @@ import { calculateReassignmentDuration, ReassignmentParams, calculateReassignmen
 
 type DataPoint = { throttle: number; duration: number };
 
-type GetDataPointsParams = Omit<ReassignmentParams, "replicationThrottle">;
+type GetDataPointsParams = Omit<ReassignmentParams, "replicationThrottle"> & {
+  throttleStep?: number;
+  startThrottle?: number;
+};
 
 const getDataPoints = (params: GetDataPointsParams): DataPoint[] => {
-
-  const minThrottle = Math.ceil(calculateReassignmentThrottle({duration: 3, ...params}));
-  const range: number[] = Array.from({ length: 11 }, (_, i) => minThrottle + i * 10);
+  const { throttleStep = 10, ...reassignmentParams } = params;
+  const minThrottle = Math.ceil(calculateReassignmentThrottle({duration: 3, ...reassignmentParams}));
+  const startThrottle = params.startThrottle === undefined || params.startThrottle < minThrottle ? minThrottle : params.startThrottle;
+  const range: number[] = Array.from({ length: 11 }, (_, i) => startThrottle + i * throttleStep);
   const dataPoints: DataPoint[] = range.map((throttle) => {
     const duration = calculateReassignmentDuration({
-      ...params,
+      ...reassignmentParams,
       replicationThrottle: throttle,
     });
     return { throttle, duration };
