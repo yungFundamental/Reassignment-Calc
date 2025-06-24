@@ -31,3 +31,13 @@ export const calculateReassignmentThrottle = ({
 }: Omit<ReassignmentParams, "replicationThrottle"> & { duration: number }): number => {
     return brokerReplicationThroughput + (((totalStorageToMove / duration) + (averageClusterThroughputIn * replicationFactor)) / totalBrokersAfter);
 };
+
+// Calculates the minimal throttle so that the duration is positive
+export const calculateMinimalThrottle = ({
+    totalBrokersAfter,
+    brokerReplicationThroughput,
+    averageClusterThroughputIn,
+    replicationFactor,
+}: Omit<ReassignmentParams, "totalStorageToMove" | "replicationThrottle">): number => {
+    return brokerReplicationThroughput + (averageClusterThroughputIn * replicationFactor) / totalBrokersAfter;
+};
