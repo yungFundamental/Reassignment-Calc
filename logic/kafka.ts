@@ -37,4 +37,3 @@ export const calculateReassignmentThrottle = ({
     // throttle = brokerReplicationThroughput + (((totalStorageToMove / duration) + (averageClusterThroughputIn * replicationFactor)) / totalBrokersAfter)
     return brokerReplicationThroughput + (((totalStorageToMove / duration) + (averageClusterThroughputIn * replicationFactor)) / totalBrokersAfter);
 };
-// TODO How to calculate data points
