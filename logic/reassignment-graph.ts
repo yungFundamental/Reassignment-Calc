@@ -1,4 +1,4 @@
-import { calculateReassignmentDuration, ReassignmentParams, calculateReassignmentThrottle} from "../../logic/kafka";
+import { calculateReassignmentDuration, ReassignmentParams, calculateReassignmentThrottle} from "./kafka";
 
 type DataPoint = { throttle: number; duration: number };
 

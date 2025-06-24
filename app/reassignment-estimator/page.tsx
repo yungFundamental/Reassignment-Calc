@@ -2,7 +2,7 @@
 import { title } from "@/components/primitives";
 import Graph from "@/components/graph";
 import { useState } from "react";
-import getDataPoints from "./logic";
+import getDataPoints from "../../logic/reassignment-graph";
 import { NumberInput } from "@heroui/react";
 
 
